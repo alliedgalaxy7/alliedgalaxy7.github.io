@@ -2,109 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Vehicle Performance Score</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    .result { font-weight: bold; }
-    .D { color: yellow; }
-    .C { color: blue; }
-    .B { color: green; }
-    .A { color: red; }
-    .S { color: magenta; }
-    .Splus { color: darkmagenta; }
-  </style>
+  <meta name="description" content="Sample Website Design" />
+  <title>Welcome to My Website</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="icon" href="favicon.png">
 </head>
 <body>
-  <h1>Calculate Vehicle Performance Score</h1>
-  
-  <form id="vehicleForm">
-    <p>Choose your measurement system:</p>
-    <input type="radio" name="system" value="metric" id="metric" checked> Metric (kW, Nm, km/h, kg, m²)<br>
-    <input type="radio" name="system" value="imperial" id="imperial"> Imperial (hp, lb-ft, mph, lbs, ft²)<br><br>
-    
-    <div id="inputs">
-      <label for="power">Power:</label><br>
-      <input type="number" id="power" required><br><br>
-
-      <label for="torque">Torque:</label><br>
-      <input type="number" id="torque" required><br><br>
-
-      <label for="topSpeed">Top Speed:</label><br>
-      <input type="number" id="topSpeed" required><br><br>
-
-      <label for="weight">Weight:</label><br>
-      <input type="number" id="weight" required><br><br>
-
-      <label for="area">Frontal Area:</label><br>
-      <input type="number" id="area" required><br><br>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <a href="#">MyWebsite</a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <button type="submit">Calculate Performance</button>
-  </form>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Welcome to My Website</h1>
+      <p>We create amazing experiences with code, design, and creativity.</p>
+      <a href="#about" class="btn">Learn More</a>
+    </div>
+  </section>
 
-  <h2 id="result" class="result"></h2>
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="about-images">
+      <img src="https://via.placeholder.com/300" alt="Image 1">
+      <img src="https://via.placeholder.com/300" alt="Image 2">
+    </div>
+  </section>
 
-  <script>
-    function calculate(area, topSpeed, power, torque, weight) {
-      const alpha = 1.5;    // Top speed
-      const beta  = 1.25;   // Power
-      const gamma = 0.8;    // Torque
-      const delta = 1.25;   // Weight
-      const zeta = 1.0;     // Cross-sectional area
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </footer>
 
-      const numerator = alpha * topSpeed + beta * power + gamma * torque;
-      const denominator = delta * weight + zeta * area;
-
-      return 1200 * numerator / denominator;
-    }
-
-    document.getElementById('vehicleForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const system = document.querySelector('input[name="system"]:checked').value;
-
-      let power = parseFloat(document.getElementById('power').value);
-      let torque = parseFloat(document.getElementById('torque').value);
-      let topSpeed = parseFloat(document.getElementById('topSpeed').value);
-      let weight = parseFloat(document.getElementById('weight').value);
-      let area = parseFloat(document.getElementById('area').value);
-
-      // Convert to metric if imperial is selected
-      if (system === 'imperial') {
-        power *= 0.7457; // hp to kW
-        torque *= 1.3558; // lb-ft to Nm
-        topSpeed *= 1.60934; // mph to km/h
-        weight *= 0.453592; // lbs to kg
-        area *= 0.092903; // ft² to m²
-      }
-
-      const performanceScore = calculate(area, topSpeed, power, torque, weight);
-
-      let resultText = `The performance score of the vehicle is: ${performanceScore.toFixed(1)}\n`;
-
-      let className = '';
-      if (performanceScore <= 250) {
-        resultText += 'This vehicle therefore ranks as a <span class="D">D</span> class vehicle.';
-        className = 'D';
-      } else if (performanceScore > 250 && performanceScore <= 500) {
-        resultText += 'This vehicle therefore ranks as a <span class="C">C</span> class vehicle.';
-        className = 'C';
-      } else if (performanceScore > 500 && performanceScore <= 750) {
-        resultText += 'This vehicle therefore ranks as a <span class="B">B</span> class vehicle.';
-        className = 'B';
-      } else if (performanceScore > 750 && performanceScore <= 1000) {
-        resultText += 'This vehicle therefore ranks as an <span class="A">A</span> class vehicle.';
-        className = 'A';
-      } else if (performanceScore > 1000 && performanceScore <= 1250) {
-        resultText += 'This vehicle therefore ranks as an <span class="S">S</span> class vehicle.';
-        className = 'S';
-      } else if (performanceScore > 1250) {
-        resultText += 'This vehicle therefore ranks as an <span class="Splus">S+</span> class vehicle.';
-        className = 'Splus';
-      }
-
-      document.getElementById('result').innerHTML = resultText;
-    });
-  </script>
 </body>
 </html>
